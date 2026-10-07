@@ -1,0 +1,28 @@
+# Dependencies untuk keton.py, midas.py, vkey.py
+
+# HTTP & utilitas
+requests
+urllib3
+
+# Environment variables
+python-dotenv
+
+# GUI / keyboard hook
+pynput
+
+# Image processing
+Pillow
+
+# OCR native Apple (macOS)
+ocrmac
+
+# Audio recording & processing (vkey.py)
+sounddevice
+numpy
+scipy
+
+# Speech-to-text (vkey.py)
+openai-whisper
+
+# Deep learning backend (vkey.py)
+torch
