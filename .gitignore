@@ -1,1 +1,7 @@
 .env
+venv/
+__pycache__/
+*.pyc
+temp_*_*.png
+temp_*_*.jpg
+temp_*_*.wav

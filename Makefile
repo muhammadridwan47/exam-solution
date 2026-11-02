@@ -1,18 +1,28 @@
-midas:
-	@echo "Menjalankan skrip midas.py..."
-	python3 midas.py
+VENV := venv
+PYTHON := $(VENV)/bin/python
+PIP := $(VENV)/bin/pip
 
-keton:
-	@echo "Menjalankan skrip keton.py..."
-	python3 keton.py
+.PHONY: run list dry-run venv install test-telegram
 
-vkey:
-	@echo "Menjalankan skrip vkey.py..."
-	python3 vkey.py
+run: $(VENV)/bin/activate
+	@echo "Menjalankan main.py (hotkey listener)..."
+	$(PYTHON) main.py
 
-venv:
-	source venv/bin/activate
+list: $(VENV)/bin/activate
+	$(PYTHON) main.py --list
 
-install:
-	@echo "Menginstal dependensi dari requirements.txt..."
-	pip install -r requirements.txt
+dry-run: $(VENV)/bin/activate
+	$(PYTHON) main.py --run 1 --dry-run
+
+$(VENV)/bin/activate:
+	python3 -m venv $(VENV)
+
+venv: $(VENV)/bin/activate
+
+install: $(VENV)/bin/activate
+	@echo "Menginstal dependensi dari requirements.txt ke $(VENV)..."
+	$(PIP) install -r requirements.txt
+
+test-telegram: $(VENV)/bin/activate
+	@echo "Mengirim pesan uji ke Telegram..."
+	@$(PYTHON) -c 'import os, requests; from dotenv import load_dotenv; load_dotenv(); token = os.getenv("TELEGRAM_TOKEN"); chat = os.getenv("TELEGRAM_CHAT_ID"); assert token and chat, "TELEGRAM_TOKEN/TELEGRAM_CHAT_ID belum diset di .env"; r = requests.post(f"https://api.telegram.org/bot{token}/sendMessage", json={"chat_id": chat, "text": "connected"}); print(r.status_code, r.json()); r.raise_for_status()'

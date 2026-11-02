@@ -1,4 +1,4 @@
-# Dependencies untuk keton.py, midas.py, vkey.py
+# Dependencies untuk main.py (exam-solution)
 
 # HTTP & utilitas
 requests
@@ -16,13 +16,9 @@ Pillow
 # OCR native Apple (macOS)
 ocrmac
 
-# Audio recording & processing (vkey.py)
+# Audio recording & speech-to-text (hanya untuk binding AUDIO=true)
 sounddevice
 numpy
 scipy
-
-# Speech-to-text (vkey.py)
 openai-whisper
-
-# Deep learning backend (vkey.py)
 torch
